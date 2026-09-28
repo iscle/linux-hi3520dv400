@@ -11590,6 +11590,7 @@ F:	Documentation/devicetree/bindings/timer/hisilicon,hi3520dv400-timer.yaml
 F:	arch/arm/mach-hisi/hi3520dv400.c
 F:	drivers/clk/hisilicon/clk-hi3520dv400.c
 F:	drivers/clocksource/timer-hi3520dv400.c
+F:	drivers/phy/hisilicon/phy-hi3520dv400-usb.c
 F:	include/dt-bindings/clock/hisilicon,hi3520dv400-crg.h
 
 HISILICON HIGH PERFORMANCE RSA ENGINE DRIVER (HPRE)

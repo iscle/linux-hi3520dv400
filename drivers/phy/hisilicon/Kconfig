@@ -2,6 +2,17 @@
 #
 # Phy drivers for Hisilicon platforms
 #
+config PHY_HI3520DV400_USB
+	tristate "HiSilicon Hi3520DV400 USB2 PHY"
+	depends on OF && (ARCH_HISI || COMPILE_TEST)
+	select GENERIC_PHY
+	select MFD_SYSCON
+	help
+	  Enable the shared USB 2.0 PHY used by the Hi3520DV400 EHCI
+	  and OHCI controllers. The generic PHY framework keeps the
+	  PHY powered while either host controller is using it.
+	  To build this driver as a module, choose M here.
+
 config PHY_HI6220_USB
 	tristate "hi6220 USB PHY support"
 	depends on (ARCH_HISI && ARM64) || COMPILE_TEST
