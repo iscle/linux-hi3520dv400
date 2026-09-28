@@ -11,3 +11,5 @@ dtb-$(CONFIG_ARCH_HIX5HD2) += \
 	hisi-x5hd2-dkb.dtb
 dtb-$(CONFIG_ARCH_SD5203) += \
 	sd5203.dtb
+
+dtb-$(CONFIG_ARCH_HI3520DV400) += hi3520dv400-dahua-xvr4108hs-x1.dtb

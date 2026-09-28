@@ -1,0 +1,52 @@
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+/dts-v1/;
+#include "hi3520dv400.dtsi"
+
+/ {
+	model = "Dahua XVR4108HS-X1 (development configuration)";
+	compatible = "dahua,xvr4108hs-x1", "hisilicon,hi3520dv400";
+
+	aliases {
+		serial0 = &uart0;
+		ethernet0 = &gmac;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+
+	/* Deliberate bring-up limit; physical RAM has not been measured.
+	 * The stock DT says 1 GiB, but its bootloader overrides that at boot.
+	 */
+	memory@80000000 {
+		device_type = "memory";
+		reg = <0x80000000 0x08000000>;
+	};
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
+};
+
+&sata {
+	status = "okay";
+	hisilicon,ports = <1>;
+};
+
+&gmac {
+	status = "okay";
+	phy-mode = "rmii";
+	phy-handle = <&ethphy>;
+
+	ethphy: ethernet-phy@0 {
+		reg = <0>;
+	};
+};
