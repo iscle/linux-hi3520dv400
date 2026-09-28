@@ -15,6 +15,16 @@ config COMMON_CLK_HI3519
 	help
 	  Build the clock driver for hi3519.
 
+config COMMON_CLK_HI3520DV400
+	tristate "HiSilicon Hi3520DV400 clock/reset controller"
+	depends on ARCH_HISI || COMPILE_TEST
+	select RESET_CONTROLLER
+	help
+	  Enable the Hi3520DV400 APB and UART clocks, Ethernet clock
+	  gates and Ethernet reset controls. Clock and reset operations
+	  serialize accesses to their shared control register.
+	  To build this driver as a module, choose M here.
+
 config COMMON_CLK_HI3559A
 	bool "Hi3559A Clock Driver"
 	depends on ARCH_HISI || COMPILE_TEST
