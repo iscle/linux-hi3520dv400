@@ -1,0 +1,151 @@
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+#include <dt-bindings/clock/hisilicon,hi3520dv400-crg.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	interrupt-parent = <&gic>;
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		enable-method = "hisilicon,hi3520dv400-smp";
+
+		cpu@0 {
+			device_type = "cpu";
+			compatible = "arm,cortex-a7";
+			reg = <0>;
+		};
+
+		cpu@1 {
+			device_type = "cpu";
+			compatible = "arm,cortex-a7";
+			reg = <1>;
+		};
+	};
+
+	clk_3m: clock-3m {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <3000000>;
+	};
+
+	soc {
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		ohci: usb@10030000 {
+			compatible = "generic-ohci";
+			reg = <0x10030000 0x10000>;
+			interrupts = <GIC_SPI 18 IRQ_TYPE_LEVEL_HIGH>;
+			phys = <&usb_phy>;
+			phy-names = "usb";
+			status = "disabled";
+		};
+
+		ehci: usb@10040000 {
+			compatible = "generic-ehci";
+			reg = <0x10040000 0x10000>;
+			interrupts = <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>;
+			phys = <&usb_phy>;
+			phy-names = "usb";
+			status = "disabled";
+		};
+
+		gmac: ethernet@100a0000 {
+			compatible = "hisilicon,hi3520dv400-gmac", "hisilicon,hisi-gmac-v2";
+			reg = <0x100a0000 0x1000>, <0x100a300c 0x4>;
+			interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&crg HI3520DV400_CLK_ETH>,
+				 <&crg HI3520DV400_CLK_ETH_MACIF>;
+			clock-names = "mac_core", "mac_ifc";
+			resets = <&crg HI3520DV400_RST_ETH>,
+				 <&crg HI3520DV400_RST_ETH_MACIF>,
+				 <&crg HI3520DV400_RST_ETH_PHY>;
+			reset-names = "mac_core", "mac_ifc", "phy";
+			hisilicon,phy-reset-delays-us = <10000 10000 30000>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "disabled";
+		};
+
+		gic: interrupt-controller@10301000 {
+			compatible = "arm,cortex-a7-gic";
+			reg = <0x10301000 0x1000>, <0x10302000 0x2000>;
+			interrupt-controller;
+			#interrupt-cells = <3>;
+			#address-cells = <0>;
+		};
+
+		sata: sata@11010000 {
+			compatible = "hisilicon,hi3520dv400-ahci";
+			reg = <0x11010000 0x1000>;
+			interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
+			hisilicon,crg = <&crg>;
+			hisilicon,misc = <&misc>;
+			status = "disabled";
+		};
+
+		timer@12000000 {
+			compatible = "hisilicon,hi3520dv400-timer";
+			reg = <0x12000000 0x20>, <0x12000020 0x20>,
+			      <0x12010000 0x20>;
+			reg-names = "clocksource", "clockevent0", "clockevent1";
+			interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 2 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&clk_3m>;
+		};
+
+		crg: clock-controller@12040000 {
+			compatible = "hisilicon,hi3520dv400-crg", "syscon";
+			reg = <0x12040000 0x1000>;
+			#clock-cells = <1>;
+			#reset-cells = <1>;
+		};
+
+		sysctrl: system-controller@12050000 {
+			compatible = "hisilicon,hi3520dv400-sysctrl", "syscon";
+			reg = <0x12050000 0x1000>;
+		};
+
+		uart0: serial@12080000 {
+			compatible = "arm,pl011", "arm,primecell";
+			reg = <0x12080000 0x1000>;
+			interrupts = <GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&crg HI3520DV400_CLK_UART0>,
+				 <&crg HI3520DV400_CLK_APB>;
+			clock-names = "uartclk", "apb_pclk";
+			status = "disabled";
+		};
+
+		pinctrl: pinctrl@120f0000 {
+			compatible = "pinctrl-single";
+			reg = <0x120f0000 0x3a8>;
+			#pinctrl-cells = <1>;
+			pinctrl-single,register-width = <32>;
+			pinctrl-single,function-mask = <7>;
+		};
+
+		misc: system-controller@12120000 {
+			compatible = "hisilicon,hi3520dv400-misc", "syscon";
+			reg = <0x12120000 0x10000>;
+		};
+	};
+
+	usb_phy: usb-phy {
+		compatible = "hisilicon,hi3520dv400-usb2-phy";
+		#phy-cells = <0>;
+		hisilicon,crg = <&crg>;
+		hisilicon,misc = <&misc>;
+	};
+
+	reboot {
+		compatible = "syscon-reboot";
+		regmap = <&sysctrl>;
+		offset = <0x4>;
+		mask = <0xffffffff>;
+	};
+};

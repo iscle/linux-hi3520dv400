@@ -11588,6 +11588,7 @@ F:	Documentation/devicetree/bindings/clock/hisilicon,hi3520dv400-crg.yaml
 F:	Documentation/devicetree/bindings/phy/hisilicon,hi3520dv400-usb2-phy.yaml
 F:	Documentation/devicetree/bindings/soc/hisilicon/hisilicon,hi3520dv400-sysctrl.yaml
 F:	Documentation/devicetree/bindings/timer/hisilicon,hi3520dv400-timer.yaml
+F:	arch/arm/boot/dts/hisilicon/hi3520dv400.dtsi
 F:	arch/arm/mach-hisi/hi3520dv400.c
 F:	drivers/ata/ahci_hi3520dv400.c
 F:	drivers/clk/hisilicon/clk-hi3520dv400.c
