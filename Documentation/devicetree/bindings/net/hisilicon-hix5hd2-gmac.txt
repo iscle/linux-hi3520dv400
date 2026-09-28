@@ -3,6 +3,7 @@ Hisilicon hix5hd2 gmac controller
 Required properties:
 - compatible: should contain one of the following SoC strings:
 	* "hisilicon,hix5hd2-gmac"
+	* "hisilicon,hi3520dv400-gmac"
 	* "hisilicon,hi3798cv200-gmac"
 	* "hisilicon,hi3516a-gmac"
 	and one of the following version string:
