@@ -161,6 +161,7 @@
 #define GMAC_SPEED_1000			0x05
 #define GMAC_SPEED_100			0x01
 #define GMAC_SPEED_10			0x00
+#define GMAC_IF_RMII			BIT(7)
 #define GMAC_FULL_DUPLEX		BIT(4)
 
 #define RX_BQ_INT_THRESHOLD		0x01
@@ -300,10 +301,13 @@ static void hix5hd2_config_port(struct net_device *dev, u32 speed, u32 duplex)
 			val = RGMII_SPEED_10;
 		break;
 	case PHY_INTERFACE_MODE_MII:
+	case PHY_INTERFACE_MODE_RMII:
 		if (speed == SPEED_100)
 			val = MII_SPEED_100;
 		else
 			val = MII_SPEED_10;
+		if (priv->phy_mode == PHY_INTERFACE_MODE_RMII)
+			val |= GMAC_IF_RMII;
 		break;
 	default:
 		netdev_warn(dev, "not supported mode\n");
@@ -1295,6 +1299,7 @@ static void hix5hd2_dev_remove(struct platform_device *pdev)
 }
 
 static const struct of_device_id hix5hd2_of_match[] = {
+	{ .compatible = "hisilicon,hi3520dv400-gmac", .data = (void *)GEMAC_V2 },
 	{ .compatible = "hisilicon,hisi-gmac-v1", .data = (void *)GEMAC_V1 },
 	{ .compatible = "hisilicon,hisi-gmac-v2", .data = (void *)GEMAC_V2 },
 	{ .compatible = "hisilicon,hix5hd2-gmac", .data = (void *)GEMAC_V1 },
