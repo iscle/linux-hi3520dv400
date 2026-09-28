@@ -11578,6 +11578,14 @@ S:	Maintained
 F:	Documentation/devicetree/bindings/gpio/hisilicon,ascend910-gpio.yaml
 F:	drivers/gpio/gpio-hisi.c
 
+HISILICON HI3520DV400 SOC SUPPORT
+M:	Iscle <albertiscle9@gmail.com>
+S:	Odd Fixes
+W:	https://github.com/iscle/dahua-xvr
+T:	git https://github.com/iscle/linux-hi3520dv400.git hi3520dv400
+F:	Documentation/devicetree/bindings/clock/hisilicon,hi3520dv400-crg.yaml
+F:	include/dt-bindings/clock/hisilicon,hi3520dv400-crg.h
+
 HISILICON HIGH PERFORMANCE RSA ENGINE DRIVER (HPRE)
 M:	Zhiqi Song <songzhiqi1@huawei.com>
 M:	Longfang Liu <liulongfang@huawei.com>
