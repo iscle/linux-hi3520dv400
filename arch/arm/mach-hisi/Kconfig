@@ -13,6 +13,19 @@ if ARCH_HISI
 
 menu "Hisilicon platform type"
 
+config ARCH_HI3520DV400
+	bool "HiSilicon Hi3520DV400"
+	depends on ARCH_MULTI_V7
+	select COMMON_CLK_HI3520DV400
+	select HI3520DV400_TIMER
+	select PINCTRL
+	select PINCTRL_SINGLE
+	help
+	  Enable support for the HiSilicon Hi3520DV400 Cortex-A7 SoC.
+	  This selects the clock controller, SP804 system timers and
+	  pin controller used by devices based on this chip.
+	  Say Y when building a kernel for a Hi3520DV400 board.
+
 config ARCH_HI3xxx
 	bool "Hisilicon Hi36xx family"
 	depends on ARCH_MULTI_V7
