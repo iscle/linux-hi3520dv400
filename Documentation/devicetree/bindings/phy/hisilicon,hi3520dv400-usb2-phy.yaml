@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/phy/hisilicon,hi3520dv400-usb2-phy.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: HiSilicon Hi3520DV400 shared USB 2.0 PHY
+
+maintainers:
+  - Iscle <albertiscle9@gmail.com>
+
+description: |
+  One PHY instance controls both host ports and is shared by the EHCI and
+  OHCI controllers. The CRG and miscellaneous system controller supply
+  the reset, clock and analog configuration registers.
+
+properties:
+  compatible:
+    const: hisilicon,hi3520dv400-usb2-phy
+  '#phy-cells':
+    const: 0
+  hisilicon,crg:
+    $ref: /schemas/types.yaml#/definitions/phandle
+    description: Clock and reset controller containing USB control registers.
+  hisilicon,misc:
+    $ref: /schemas/types.yaml#/definitions/phandle
+    description: Miscellaneous system controller containing PHY analog registers.
+
+required:
+  - compatible
+  - '#phy-cells'
+  - hisilicon,crg
+  - hisilicon,misc
+
+additionalProperties: false
