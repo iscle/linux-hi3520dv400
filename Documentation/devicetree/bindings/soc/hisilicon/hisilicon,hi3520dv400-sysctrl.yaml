@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/soc/hisilicon/hisilicon,hi3520dv400-sysctrl.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: HiSilicon Hi3520DV400 system controllers
+
+maintainers:
+  - Iscle <albertiscle9@gmail.com>
+
+properties:
+  compatible:
+    items:
+      - enum:
+          - hisilicon,hi3520dv400-sysctrl
+          - hisilicon,hi3520dv400-misc
+      - const: syscon
+  reg:
+    maxItems: 1
+
+required:
+  - compatible
+  - reg
+
+additionalProperties: false
