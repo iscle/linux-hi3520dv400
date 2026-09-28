@@ -129,3 +129,5 @@ libata-$(CONFIG_SATA_PMP)	+= libata-pmp.o
 libata-$(CONFIG_ATA_ACPI)	+= libata-acpi.o
 libata-$(CONFIG_SATA_ZPODD)	+= libata-zpodd.o
 libata-$(CONFIG_PATA_TIMINGS)	+= libata-pata-timings.o
+
+obj-$(CONFIG_SATA_AHCI_HI3520DV400) += ahci_hi3520dv400.o

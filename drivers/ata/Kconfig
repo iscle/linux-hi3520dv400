@@ -209,6 +209,18 @@ config AHCI_ST
 
 	  If unsure, say N.
 
+config SATA_AHCI_HI3520DV400
+	tristate "HiSilicon Hi3520DV400 AHCI SATA"
+	depends on OF && (ARCH_HISI || COMPILE_TEST)
+	select SATA_HOST
+	select SATA_AHCI_PLATFORM
+	select MFD_SYSCON
+	help
+	  Enable the Hi3520DV400 AHCI controller and its integrated
+	  SATA PHY. The driver configures the controller clocks and
+	  resets and reapplies PHY equalization after link recovery.
+	  To build this driver as a module, choose M here.
+
 config AHCI_IMX
 	tristate "Freescale i.MX AHCI SATA support"
 	depends on MFD_SYSCON && (ARCH_MXC || COMPILE_TEST)
