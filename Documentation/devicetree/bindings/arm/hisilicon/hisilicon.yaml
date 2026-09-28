@@ -15,6 +15,11 @@ properties:
 
   compatible:
     oneOf:
+      - description: Hi3520DV400 based boards.
+        items:
+          - const: dahua,xvr4108hs-x1
+          - const: hisilicon,hi3520dv400
+
       - description: Hi3660 based boards.
         items:
           - const: hisilicon,hi3660-hikey960

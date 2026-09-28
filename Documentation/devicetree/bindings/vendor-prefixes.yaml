@@ -405,6 +405,8 @@ patternProperties:
     description: Maxim Integrated Products (formerly Dallas Semiconductor)
   "^dataimage,.*":
     description: DataImage, Inc.
+  "^dahua,.*":
+    description: Zhejiang Dahua Technology Co., Ltd.
   "^davicom,.*":
     description: DAVICOM Semiconductor, Inc.
   "^deepcomputing,.*":
