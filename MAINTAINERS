@@ -11583,6 +11583,7 @@ M:	Iscle <albertiscle9@gmail.com>
 S:	Odd Fixes
 W:	https://github.com/iscle/dahua-xvr
 T:	git https://github.com/iscle/linux-hi3520dv400.git hi3520dv400
+F:	Documentation/devicetree/bindings/ata/hisilicon,hi3520dv400-ahci.yaml
 F:	Documentation/devicetree/bindings/clock/hisilicon,hi3520dv400-crg.yaml
 F:	Documentation/devicetree/bindings/phy/hisilicon,hi3520dv400-usb2-phy.yaml
 F:	Documentation/devicetree/bindings/soc/hisilicon/hisilicon,hi3520dv400-sysctrl.yaml
